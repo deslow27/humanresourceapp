@@ -24,4 +24,12 @@ class Employee extends Model
         'status',
         'salary'
     ];
+    
+    public function department() {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
 }
