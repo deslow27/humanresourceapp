@@ -20,7 +20,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
                         <li class="breadcrumb-item" aria-current="page">Role</li>
-                        <li class="breadcrumb-item active" aria-current="page">New</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </nav>
             </div>
@@ -30,17 +30,18 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
-                    Create
+                    Edit
                 </h5>
             </div>
             <div class="card-body">
 
-                <form action="{{ route('roles.store') }}" method="POST">
+                <form action="{{ route('roles.update', $role->id) }}" method="POST">
                     @csrf
-                    
+                    @method('PUT')
+
                     <div class="mb-3">
                         <label for="" class="form-label">Title</label>
-                        <input type="text" class="form-control" name="title" required>
+                        <input type="text" class="form-control" name="title" value="{{ old('title', $role->title) }}" required>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -48,14 +49,14 @@
 
                     <div class="mb-3">
                         <label for="" class="form-label">Description</label>
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror"></textarea>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror">{{ old('title', $role->description) }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary">
-                        Create Role
+                        Update Role
                     </button>
                     <a href="{{ route('roles.index') }}" class="btn btn-secondary">Back to list</a>
 
