@@ -13,4 +13,20 @@ class DepartmentController extends Controller
         $departments = Department::all();
         return view("departments.index",compact("departments"));
     }
+
+    public function create(){
+        return view("departments.create");
+    }
+
+    public function store(Request $request){
+        $request->validate([
+            "name"=> "required|string|max:255",
+            "description"=> "nullable|string|max:255",
+            "status"=> "required|string|max:50",
+        ]);
+
+        Department::create($request->all());
+
+        return redirect()->route('departments.index')->with('success','Department created successfully');
+    }
 }
