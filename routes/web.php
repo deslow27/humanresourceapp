@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\DepartmentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +14,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('/employees', EmployeeController::class);
+Route::resource('/departments', DepartmentController::class);
 
 Route::resource('/tasks', TaskController::class);
 Route::get('tasks/done/{id}', [TaskController::class, 'done'])->name('tasks.done');
