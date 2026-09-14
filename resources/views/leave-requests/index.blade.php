@@ -64,13 +64,21 @@
                             <td>{{$leaveRequest->start_date}}</td>
                             <td>{{$leaveRequest->end_date}}</td>
                             <td>
-                                @if ($leaveRequest->status == 'approved')
+                                @if ($leaveRequest->status == 'confirm')
                                     <span class="text-success">{{ ucfirst($leaveRequest->status) }}</span>
+                                @elseif ($leaveRequest->status == 'reject')
+                                    <span class="text-danger">{{ ucfirst($leaveRequest->status) }}</span>
                                 @else
                                     <span class="text-warning">{{ ucfirst($leaveRequest->status) }}</span>
                                 @endif
                             </td>
                             <td>
+                                @if ($leaveRequest->status == 'pending' || $leaveRequest->status == 'reject')
+                                    <a href="{{ route('leave-requests.confirm', $leaveRequest->id) }}" class="btn btn-success btn-sm">Confirm</a>
+                                @else
+                                    <a href="{{ route('leave-requests.reject', $leaveRequest->id) }}" class="btn btn-secondary btn-sm">Reject</a>
+                                @endif
+
                                 <a href="{{ route('leave-requests.edit', $leaveRequest->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
                                 <form action="{{ route('leave-requests.destroy', $leaveRequest->id) }}" method="POST" style="display: inline">

@@ -22,7 +22,10 @@ Route::resource('/departments', DepartmentController::class);
 Route::resource('/roles', RoleController::class);
 Route::resource('/presences', PresenceController::class);
 Route::resource('/payrolls', PayrollController::class);
+
 Route::resource('/leave-requests', LeaveRequestController::class);
+Route::get('/leave-requests/confirm/{id}', [LeaveRequestController::class, 'confirm'])->name('leave-requests.confirm');
+Route::get('/leave-requests/reject/{id}', [LeaveRequestController::class, 'reject'])->name('leave-requests.reject');
 
 Route::resource('/tasks', TaskController::class);
 Route::get('tasks/done/{id}', [TaskController::class, 'done'])->name('tasks.done');

@@ -44,16 +44,34 @@ class LeaveRequestController extends Controller
     }
 
     public function update(Request $request, LeaveRequest $leaveRequest) {
-    $request->validate([
-        'employee_id' => 'required',
-        'leave_type' => 'required|string',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date'
-    ]);
+        $request->validate([
+            'employee_id' => 'required',
+            'leave_type' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date'
+        ]);
 
-    $leaveRequest->update($request->all());
+        $leaveRequest->update($request->all());
 
-    return redirect()->route('leave-requests.index')->with('success', 'Leave request updated successfully.');
-}
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request updated successfully.');
+    }
+
+    public function confirm(int $id) {
+        $leaveRequest = LeaveRequest::findOrFail($id);
+        $leaveRequest->update([
+            'status' => 'confirm'
+        ]);
+
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request confirmed successfully.');
+    }
+
+    public function reject(int $id) {
+        $leaveRequest = LeaveRequest::findOrFail($id);
+        $leaveRequest->update([
+            'status' => 'reject'
+        ]);
+
+        return redirect()->route('leave-requests.index')->with('success', 'Leave request rejected successfully.');
+    }
 
 }
