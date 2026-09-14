@@ -50,7 +50,9 @@
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Status</th>
-                            <th>Option</th>
+                            @if(session('role') == 'HR')
+                                <th>Option</th>
+                            @endif 
                         </tr>
                     </thead>
 
@@ -73,6 +75,7 @@
                                 @endif
                             </td>
                             <td>
+                                @if(session('role') == 'HR')
                                 @if ($leaveRequest->status == 'pending' || $leaveRequest->status == 'reject')
                                     <a href="{{ route('leave-requests.confirm', $leaveRequest->id) }}" class="btn btn-success btn-sm">Confirm</a>
                                 @else
@@ -86,6 +89,7 @@
                                     @method ('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Sure?')">Delete</button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
 
