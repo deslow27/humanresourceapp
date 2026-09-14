@@ -50,7 +50,9 @@
                             <th>Check Out</th>
                             <th>Date</th>
                             <th>Status</th>
+                            @if (session('role') == 'HR')
                             <th>Option</th>
+                            @endif
                         </tr>
                     </thead>
 
@@ -71,6 +73,8 @@
                                 @endif
                             </td>
                             <td>
+
+                            @if (session('role') == 'HR')
                                 <a href="{{ route('presences.edit', $presence->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
                                 <form action="{{ route('presences.destroy', $presence->id) }}" method="POST" style="display: inline">
@@ -78,6 +82,7 @@
                                     @method ('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Sure?')">Delete</button>
                                 </form>
+                            @endif   
                             </td>
                         </tr>
 
