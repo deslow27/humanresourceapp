@@ -35,7 +35,9 @@
             </div>
             <div class="card-body">
                 <div class="d-flex">
-                    <a href="{{ route('tasks.create')}}" class="btn btn-primary mb-3 ms-auto">New Tasks</a>
+                    @if(session('role') == 'HR')
+                        <a href="{{ route('tasks.create')}}" class="btn btn-primary mb-3 ms-auto">New Tasks</a>
+                    @endif
                 </div>
 
                 @if(session('success'))
@@ -80,13 +82,16 @@
                                 <a href="{{ route('tasks.pending', $task->id) }}" class="btn btn-warning btn-sm">Mark as Pending</a>
                                 @endif
 
-                                <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                @if(session('role') == 'HR')
+                                    <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
-                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline">
-                                    @csrf
-                                    @method ('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
+                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline">
+                                        @csrf
+                                        @method ('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+
+                                @endif
                             </td>
                         </tr>
 
