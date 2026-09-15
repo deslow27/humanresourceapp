@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/compiled/css/iconly.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/extensions/simple-datatables/style.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/extensions/table-datatables.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/dist/assets/extensions/@icon/dripicons/dripicons.css') }}">
+    <link rel="stylesheet" href="{{ asset('mazer/dist/assets/compiled/css/ui-icons-dripicons.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
@@ -82,7 +84,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-item {{ request()->is('employees') ? 'active' : '' }}">
-                                <a href="{{ url('/tasks') }}" class='sidebar-link'>
+                                <a href="{{ url('/employees') }}" class='sidebar-link'>
                                     <i class="bi bi-people-fill"></i>
                                     <span>Employees</span>
                                 </a>
